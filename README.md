@@ -3,6 +3,7 @@
 
 ## Contributors:
 > Yihan Li (@Litou-lyh), Hao Li (@haofrank), Jiayu Gu (@), Guanshi Wang (@oyster14)
+
 > {yl10798, hl5262, jg7956, gw2310}@nyu.edu
 
 ## Tentative plan
