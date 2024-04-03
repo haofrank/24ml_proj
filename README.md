@@ -1,9 +1,9 @@
 # Multimodal LLMs for Annotating Complex Cultural Memes in Movie Dialogues
 ## - NYU 24 Spring Machine Learning Group Project
 
-Contributors:
-Yihan Li (@Litou-lyh), Hao Li (@haofrank), Jiayu Gu (@), Guanshi Wang (@oyster14)
-{yl10798, hl5262, jg7956, gw2310}@nyu.edu
+## Contributors:
+> Yihan Li (@Litou-lyh), Hao Li (@haofrank), Jiayu Gu (@), Guanshi Wang (@oyster14)
+> {yl10798, hl5262, jg7956, gw2310}@nyu.edu
 
 ## Tentative plan
 - Week 0401
