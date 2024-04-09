@@ -9,7 +9,7 @@
 ## Tentative plan
 - Week 0401
   - [X] Built conda env image on Greene. By: yihan
-  > 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了。你们可以复制一份，然后用这个命令跑：singularity exec --overlay vllm.ext3:ro /scratch/work/public/singularity/cuda11.8.86-cudnn8.7-devel-ubuntu22.04.2.sif /bin/bash
+  > 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了。你们可以复制一份，然后用这个命令跑：singularity exec --overlay /scratch/yl10798/ml_env/vllm.ext3:ro /scratch/work/public/singularity/cuda11.8.86-cudnn8.7-devel-ubuntu22.04.2.sif /bin/bash
   > 可以参考这里https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene/software/singularity-with-miniconda
 
   - [ ] Run vllm or any LLM to get reasonable output (on greene). Assign: Hao
