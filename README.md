@@ -32,4 +32,17 @@
   - The answer is YES. For our task, we need to input with sliding context window of dialogues.
   - Would reduce memory usage, and might speed up
   - Also, relocate context start once a meme is detected. Think substring matching! This can speed up inference!
-  - Also consider the length of context windows
+    
+- Consider the different lengths of context windows
+  - Three senerios:
+    - Seperate jokes / terms
+    - Consecutive jokes
+    - Callback (大海捞针)
+- Parallelized execution of different size of contexts
+  - Parallelize short contexts, ensure completion earlier than the whole context one
+  - Dynamically append REMINDERs to the input sequence that containing the whole context
+    - Candidates of REMINDERs:
+      - Repeating occurance
+      - Detected jokes
+      - 专有名词（英语不会）
+
