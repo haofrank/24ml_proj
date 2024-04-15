@@ -28,6 +28,41 @@
   
   > [llama2+vllm](https://github.com/meta-llama/llama-recipes/blob/main/recipes/inference/model_servers/llama-on-prem.md)
 
+- vllm load llama
+  0.复制conda镜像到自己的目录
+
+1.连接burst：
+ssh burst
+
+2.申请机器：
+srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash
+
+
+scp将conda镜像传到slurm集群，把{}替换为自己的：
+scp /scratch/{yl10798/ml_env}/vllm.ext3 {b-3-17}:/scratch/{yl10798/ml_env}/vllm.ext3
+
+
+运行cuda镜像, 其中ext3中为自己的conda镜像：
+./run-cuda-12.1.bash
+
+下载llama模型：参考 https://zhuanlan.zhihu.com/p/651444120
+
+git config --global credential.helper store
+
+huggingface-cli login
+填入huggingface创建的token
+然后 python 跑下面脚本，下载到默认缓存地址：
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
+model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
+
+根据vllm get started运行测试
+
+nvidia-smi查看现存占用：13G左右
+
+
   - [ ] Run vllm or any LLM to get reasonable output (on greene). Assign: Hao
   - [X] Find movie dialogue (script) dataset. Assign:
   - [ ] Design prompts (append to dialogues). Can test using GPT4 / Claude 3 first. Assign:
