@@ -9,12 +9,27 @@
 ## Tentative plan
 - Week 0401
   - [X] Built conda env image on Greene. By: yihan
-  > 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了。你们可以复制一份，然后用这个命令跑：singularity exec --overlay /scratch/yl10798/ml_env/vllm.ext3:ro /scratch/work/public/singularity/cuda11.8.86-cudnn8.7-devel-ubuntu22.04.2.sif /bin/bash
+  > 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了
+  
+  > 你们可以复制一份: `cp /scratch/yl10798/ml_env/vllm.ext3 /scratch/<NetID>/your/path/`
+  
+  > 然后申请机器： `srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash`, 参考brightspace上ML课的announcement
+  > 也可以用 `sbatch`
+  
+  > 进入机器后，运行 `singularity exec --overlay /scratch/<NetID>/your/path/vllm.ext3:ro /scratch/work/public/singularity/cuda12.1.1-cudnn8.9.0-devel-ubuntu22.04.2.sif /bin/bash`
+  
   > 进入Singularity容器后需要运行 `source /ext3/env.sh`，激活conda环境
-  > 可以参考这里https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene/software/singularity-with-miniconda
+  
+  > 使用 `python`, `import vllm`, 验证vllm已安装
+  
+  > 配置镜像可以参考这里: https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene/software/singularity-with-miniconda
+
+  > [vllm](https://docs.vllm.ai/en/latest/getting_started/quickstart.html)
+  
+  > [llama2+vllm](https://github.com/meta-llama/llama-recipes/blob/main/recipes/inference/model_servers/llama-on-prem.md)
 
   - [ ] Run vllm or any LLM to get reasonable output (on greene). Assign: Hao
-  - [ ] Find movie dialogue (script) dataset. Assign:
+  - [X] Find movie dialogue (script) dataset. Assign:
   - [ ] Design prompts (append to dialogues). Can test using GPT4 / Claude 3 first. Assign:
   - [ ] Survey on serving techs (e.g. quantization). Assign:
 
