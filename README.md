@@ -6,30 +6,29 @@
 
 > {yl10798, hl5262, jg7956, gw2310}@nyu.edu
 
-## Tentative plan
-- Week 0401
-  - [X] Built conda env image on Greene. By: yihan
-  > 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了
-  
-  > 你们可以复制一份: `cp /scratch/yl10798/ml_env/vllm.ext3 /scratch/<NetID>/your/path/`
-  
-  > 运行 `ssh burst`, 然后申请机器：`srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash`, 参考brightspace上ML课的announcement
-  > 也可以用 `sbatch`
-  
-  > 进入机器后，运行 `singularity exec --overlay /scratch/<NetID>/your/path/vllm.ext3:ro /scratch/work/public/singularity/cuda12.1.1-cudnn8.9.0-devel-ubuntu22.04.2.sif /bin/bash`
-  
-  > 进入Singularity容器后需要运行 `source /ext3/env.sh`，激活conda环境
-  
-  > 使用 `python`, `import vllm`, 验证vllm已安装
-  
-  > 配置镜像可以参考这里: https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene/software/singularity-with-miniconda
 
-  > [vllm](https://docs.vllm.ai/en/latest/getting_started/quickstart.html)
+## conda镜像
+我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了
   
-  > [llama2+vllm](https://github.com/meta-llama/llama-recipes/blob/main/recipes/inference/model_servers/llama-on-prem.md)
+你们可以复制一份: `cp /scratch/yl10798/ml_env/vllm.ext3 /scratch/<NetID>/your/path/`
+  
+运行 `ssh burst`, 然后申请机器：`srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash`, 参考brightspace上ML课的announcement
+也可以用 `sbatch`
+  
+进入机器后，运行 `singularity exec --overlay /scratch/<NetID>/your/path/vllm.ext3:ro /scratch/work/public/singularity/cuda12.1.1-cudnn8.9.0-devel-ubuntu22.04.2.sif /bin/bash`
+  
+进入Singularity容器后需要运行 `source /ext3/env.sh`，激活conda环境
+  
+使用 `python`, `import vllm`, 验证vllm已安装
+  
+配置镜像可以参考这里: https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene/software/singularity-with-miniconda
 
-- vllm load llama
-  0.复制conda镜像到自己的目录
+[vllm](https://docs.vllm.ai/en/latest/getting_started/quickstart.html)
+  
+[llama2+vllm](https://github.com/meta-llama/llama-recipes/blob/main/recipes/inference/model_servers/llama-on-prem.md)
+
+## vllm load llama
+0.复制conda镜像到自己的目录
 
 1.连接burst：
 ssh burst
@@ -62,6 +61,7 @@ model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
 
 nvidia-smi查看现存占用：13G左右
 
+## Tentative plan
 
   - [ ] Run vllm or any LLM to get reasonable output (on greene). Assign: Hao
   - [X] Find movie dialogue (script) dataset. Assign:
