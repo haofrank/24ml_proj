@@ -13,7 +13,7 @@
   
   > 你们可以复制一份: `cp /scratch/yl10798/ml_env/vllm.ext3 /scratch/<NetID>/your/path/`
   
-  > 然后申请机器： `srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash`, 参考brightspace上ML课的announcement
+  > 运行 `ssh burst`, 然后申请机器：`srun --account=csci_ga_2565-2024sp --partition=n1s8-v100-1 --gres=gpu:v100:1 --time=04:00:00 --pty /bin/bash`, 参考brightspace上ML课的announcement
   > 也可以用 `sbatch`
   
   > 进入机器后，运行 `singularity exec --overlay /scratch/<NetID>/your/path/vllm.ext3:ro /scratch/work/public/singularity/cuda12.1.1-cudnn8.9.0-devel-ubuntu22.04.2.sif /bin/bash`
