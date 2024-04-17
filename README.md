@@ -74,17 +74,20 @@ nvidia-smi查看现存占用：13G左右
   - [ ] Try current serving techs. Assign:
   - [ ] Try distributed inference. Assign:
 - Week 0415
-  - 前端：
+  - 前端：guanshi
     - 视频播放
     - 字幕预加载
-  - 后端：
+  - 后端：hao
     - 单机多卡
     - 服务暴露  
-  - 测试&调研
+  - 测试&调研 jiayu，yihan
     - 效果
     - contex的记忆
     - 设计 system prompt
     - 时间
+  - 炼丹：yihan
+    - trt模型转化的参数
+    - 模型启动（triton server）的参数
 - Week 0422
 - Week 0429
 
