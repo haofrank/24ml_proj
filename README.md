@@ -74,6 +74,17 @@ nvidia-smi查看现存占用：13G左右
   - [ ] Try current serving techs. Assign:
   - [ ] Try distributed inference. Assign:
 - Week 0415
+  - 前端：
+    - 视频播放
+    - 字幕预加载
+  - 后端：
+    - 单机多卡
+    - 服务暴露  
+  - 测试&调研
+    - 效果
+    - contex的记忆
+    - 设计 system prompt
+    - 时间
 - Week 0422
 - Week 0429
 
