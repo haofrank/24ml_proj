@@ -7,7 +7,9 @@
 > {yl10798, hl5262, jg7956, gw2310}@nyu.edu
 
 
-## conda镜像
+## PATH 1: vllm
+
+### conda镜像
 我在greene上配了个镜像，在/scratch/yl10798/ml_env，已经装好vllm了
   
 你们可以复制一份: `cp /scratch/yl10798/ml_env/vllm.ext3 /scratch/<NetID>/your/path/`
@@ -27,7 +29,7 @@
   
 [llama2+vllm](https://github.com/meta-llama/llama-recipes/blob/main/recipes/inference/model_servers/llama-on-prem.md)
 
-## vllm load llama
+### load llama
 0.复制conda镜像到自己的目录
 
 1.连接burst：
@@ -51,7 +53,8 @@ git config --global credential.helper store
 huggingface-cli login
 填入huggingface创建的token
 然后 python 跑下面脚本，下载到默认缓存地址：
-# Load model directly
+
+### Load model directly
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
@@ -60,6 +63,100 @@ model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
 根据vllm get started运行测试
 
 nvidia-smi查看现存占用：13G左右
+
+## PATH 2: TensorRT LLM + Triton Server
+
+This part, we convert the original model (meta-llama/Llama-2-7b-chat-hf) to TensorRT LLM, The use Triton Server load it as a http server.
+
+### Env initialization (only once)
+
+Use the Triton latest release image version [24-03](https://docs.nvidia.com/deeplearning/triton-inference-server/release-notes/rel-24-03.html#rel-24-03) as our's work ENV. Setup follow these steps:
+
+1. Get the machine on burst.
+    
+    `srun --mpi=pmi2 --account=csci_ga_3033_077-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash`
+
+2. Pull the image to the scratch path.
+
+    ``` shell
+    cd /scratch/{NetID}
+    singularity pull  docker://nvcr.io/nvidia/tritonserver:24.03-trtllm-python-py3
+    ```
+
+3. singularity run this image.
+    Here is the **run** shell file. You can copy the contens in to one file. Then execute this file **get in the container**.
+
+    `vim ~/run-triton3.bash`
+    ``` shell
+    #!/bin/bash
+
+    args=
+    for i in "$@"; do
+      i="${i//\\/\\\\}"
+      args="${args} \"${i//\"/\\\"}\""
+    done
+
+    if [ "${args}" == "" ]; then args="/bin/bash"; fi
+
+    if [[ -e /dev/nvidia0 ]]; then nv="--nv"; fi
+
+    export SINGULARITY_BINDPATH=/home,/scratch,/share/apps
+
+    singularity exec ${nv} \
+    /scratch/hl5262/tritonserver_24.03-trtllm-python-py3.sif \
+    /bin/bash -c "
+    unset -f which
+    ${args}
+    "
+    ```
+
+    `sh ~/run-triton3.bash`
+
+4. Pull code repos.
+    Just pull This repo rename as `ml_proj` in your container. The TensorRT-LLM, tensorrtllm_backend and Llama-2-7b-chat-hf are submodule.
+    `git clone --recursive git@github.com:haofrank/24ml_proj.git ml_proj`
+
+5. Install Python requirements.
+
+    ``` shell
+    pip install -r TensorRT-LLM/requirements.txt
+    pip install -r TensorRT-LLM/examples/llama/requirements.txt
+    pip install -r tensorrtllm_backend/requirements.txt
+    pip3 install tensorrt_llm==0.8.0 --extra-index-url https://pypi.nvidia.com
+    ```
+
+### Run Triton Server (when you need)
+
+1. update the path config.
+
+  - we need update **tokenizer_dir** in these file:
+
+    ```
+      models/model_repo/llama_ifb/preprocessing/config.pbtxt
+      models/model_repo/llama_ifb/postprocessing/config.pbtxt
+      models/model_repo/llama_ifb/tensorrt_llm_bls/config.pbtxt
+    ```
+
+  - we need update **gpt_model_path** in these file:
+
+    ```
+      models/model_repo/llama_ifb/tensorrt_llm/config.pbtxt
+    ```
+
+2. Run.
+
+    There is a `models` dir in this repo, these models have been coverd to TRT format. Your can run it to test it.
+
+
+    `python3 tensorrtllm_backend/scripts/launch_triton_server.py --world_size 1 --model_repo=/home/{NetId}/ml_proj/models/model_repo/llama_ifb/`
+
+3. Test.
+
+    Here is an curl test case:
+
+    ```
+     curl -X POST localhost:8000/v2/models/ensemble/generate -d '{"text_input": "纽约大学怎么样?", "max_tokens": 200, "bad_words": "", "stop_words": "", "pad_id": 2, "end_id": 2}'
+    ```
 
 ## Tentative plan
 
