@@ -126,8 +126,12 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     ```
 
 ### Run Triton Server (when you need)
+1. copy the model(*gpt_model*) that you need.
 
-1. update the path config.
+    `cp -r /scratch/hl5262/tmp tmp`
+
+
+2. update the path config.
 
   - we need update **tokenizer_dir** in these file:
 
@@ -137,20 +141,20 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
       models/model_repo/llama_ifb/tensorrt_llm_bls/config.pbtxt
     ```
 
-  - we need update **gpt_model_path** in these file:
+  - we need update **gpt_model_path** in this file using the `tmp` dir copyed in step 1:
 
     ```
       models/model_repo/llama_ifb/tensorrt_llm/config.pbtxt
     ```
 
-2. Run.
+3. Run.
 
     There is a `models` dir in this repo, these models have been coverd to TRT format. Your can run it to test it.
 
 
     `python3 tensorrtllm_backend/scripts/launch_triton_server.py --world_size 1 --model_repo=/home/{NetId}/ml_proj/models/model_repo/llama_ifb/`
 
-3. Test.
+4. Test.
 
     Here is an curl test case:
 
