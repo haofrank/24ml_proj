@@ -1,0 +1,9 @@
+[submodule "TensorRT-LLM"]
+	path = TensorRT-LLM
+	url = git@github.com:NVIDIA/TensorRT-LLM.git
+[submodule "tensorrtllm_backend"]
+	path = tensorrtllm_backend
+	url = git@github.com:triton-inference-server/tensorrtllm_backend.git
+[submodule "Llama-2-7b-chat-hf"]
+	path = Llama-2-7b-chat-hf
+	url = https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
