@@ -76,11 +76,15 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     
     `srun --mpi=pmi2 --account=csci_ga_3033_077-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash`
 
-2. Pull the image to the scratch path.
+2. Pull or Copy the image to the scratch path.
+
 
     ``` shell
     cd /scratch/{NetID}
     singularity pull  docker://nvcr.io/nvidia/tritonserver:24.03-trtllm-python-py3
+    
+    # or cpoy tritonserver_24.03-trtllm-python-py3.sif
+    # cp -r /scratch/hl5262/tritonserver_24.03-trtllm-python-py3.sif /scratch/{NetID} 
     ```
 
 3. singularity run this image.
@@ -133,7 +137,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
 2. update the path config.
 
-  - we need update **tokenizer_dir** in these file using the `Llama-2-7b-chat-hf` absolute address:
+  - we need update **tokenizer_dir** in these file using the `Llama-2-7b-chat-hf` absolute path:
 
     ```
       models/model_repo/llama_ifb/preprocessing/config.pbtxt
