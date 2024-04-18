@@ -120,7 +120,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     Just pull This repo rename as `ml_proj` in your container. The TensorRT-LLM, tensorrtllm_backend and Llama-2-7b-chat-hf are submodule.
 
     ``` shell
-    git clone --recursive git@github.com:haofrank/24ml_proj.git ml_proj`
+    git clone --recursive git@github.com:haofrank/24ml_proj.git ml_proj
     ```
 
 6. Install Python requirements.
