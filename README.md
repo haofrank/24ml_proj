@@ -121,6 +121,9 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
     ``` shell
     git clone --recursive git@github.com:haofrank/24ml_proj.git ml_proj
+
+    # or copy /scratch/hl5262/ml_proj
+    # cp -r /scratch/hl5262/ml_proj ~/ml_proj
     ```
 
 6. Install Python requirements.
