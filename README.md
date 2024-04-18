@@ -133,7 +133,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
 2. update the path config.
 
-  - we need update **tokenizer_dir** in these file:
+  - we need update **tokenizer_dir** in these file using the `Llama-2-7b-chat-hf` absolute address:
 
     ```
       models/model_repo/llama_ifb/preprocessing/config.pbtxt
