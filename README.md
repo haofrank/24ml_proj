@@ -83,7 +83,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     cd /scratch/{NetID}
     singularity pull  docker://nvcr.io/nvidia/tritonserver:24.03-trtllm-python-py3
     
-    # or cpoy tritonserver_24.03-trtllm-python-py3.sif
+    # or copy tritonserver_24.03-trtllm-python-py3.sif
     # cp -r /scratch/hl5262/tritonserver_24.03-trtllm-python-py3.sif /scratch/{NetID} 
     ```
 
@@ -136,7 +136,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     ```
 
 ### Run Triton Server (when you need)
-1. copy the model(*gpt_model*) that you need.
+1. copy the model_repo (*gpt_model*) that you need. **If** your `ml_proj` was copied, **DO NOT** need do this step.
 
     `cp -r /scratch/hl5262/tmp tmp`
 
