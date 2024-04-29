@@ -175,6 +175,33 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
      curl -X POST localhost:8000/v2/models/ensemble/generate -d '{"text_input": "纽约大学怎么样?", "max_tokens": 200, "bad_words": "", "stop_words": "", "pad_id": 2, "end_id": 2}'
     ```
 
+5. Llama-2-13B with 2GPU
+
+   申请机器：
+
+   ```
+   sbatch --account=csci_ga_2565-2024sp --partition=n1s16-v100-2 --gres=gpu:v100:2 --time=04:00:00 --wrap "sleep infinity"
+   ```
+   修改以下文件中的 `gpt_model_path`
+    ```
+      models/model_repo/llama_ifb/preprocessing/config.pbtxt
+      models/model_repo/llama_ifb/postprocessing/config.pbtxt
+      models/model_repo/llama_ifb/tensorrt_llm/config.pbtxt
+    ```
+    修改为：
+    ```
+    parameters: {
+      key: "gpt_model_path"
+      value: {
+        string_value: "/scratch/yl10798/tmp/llama/13B/trt_engines/fp16_2gpu"
+        }
+    }
+    ```
+    启动triton server：
+   ```
+   CUDA_VISIBLE_DEVICES=0,1 python3 tensorrtllm_backend/scripts/launch_triton_server.py --world_size 2 --model_repo=/home/{NetId}/ml_proj/models/model_repo/llama_ifb/
+   ```
+
 ## Tentative plan
 
   - [ ] Run vllm or any LLM to get reasonable output (on greene). Assign: Hao
