@@ -68,6 +68,9 @@ nvidia-smi查看现存占用：13G左右
 
 This part, we convert the original model (meta-llama/Llama-2-7b-chat-hf) to TensorRT LLM, The use Triton Server load it as a http server.
 
+### Reference
+https://medium.com/trendyol-tech/deploying-a-large-language-model-llm-with-tensorrt-llm-on-triton-inference-server-a-step-by-step-d53fccc856fa
+
 ### Env initialization (only once)
 
 Use the Triton latest release image version [24-03](https://docs.nvidia.com/deeplearning/triton-inference-server/release-notes/rel-24-03.html#rel-24-03) as our's work ENV. Setup follow these steps:
