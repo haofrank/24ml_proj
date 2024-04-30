@@ -7,3 +7,6 @@
 [submodule "Llama-2-7b-chat-hf"]
 	path = Llama-2-7b-chat-hf
 	url = https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
+[submodule "llm-frontend"]
+	path = llm-frontend
+	url = git@github.com:oyster14/llm-frontend.git
