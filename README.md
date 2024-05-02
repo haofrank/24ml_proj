@@ -77,7 +77,9 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
 1. Get the machine on burst.
     
-    `srun --mpi=pmi2 --account=csci_ga_3033_085-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash`
+    ```
+   srun --mpi=pmi2 --account=csci_ga_3033_085-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash
+    ```
 
 3. Pull or Copy the image to the scratch path.
 
