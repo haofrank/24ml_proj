@@ -77,9 +77,9 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
 1. Get the machine on burst.
     
-    `srun --mpi=pmi2 --account=csci_ga_3033_077-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash`
+    `srun --mpi=pmi2 --account=csci_ga_3033_085-2024sp --partition=n1s8-v100-1 --gres=gpu:1 --time=01:00:00 --pty /bin/bash`
 
-2. Pull or Copy the image to the scratch path.
+3. Pull or Copy the image to the scratch path.
 
 
     ``` shell
@@ -90,7 +90,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     # cp -r /scratch/hl5262/tritonserver_24.03-trtllm-python-py3.sif /scratch/{NetID} 
     ```
 
-3. singularity run this image.
+4. singularity run this image.
     Here is the **run** shell file. You can copy the contens in to one file. Then execute this file **get in the container**.
 
     `vim ~/run-triton3.bash`
@@ -119,7 +119,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
 
     `sh ~/run-triton3.bash`
 
-4. Pull code repos.
+5. Pull code repos.
     Just pull This repo rename as `ml_proj` in your container. The TensorRT-LLM, tensorrtllm_backend and Llama-2-7b-chat-hf are submodule.
 
     ``` shell
