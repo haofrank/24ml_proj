@@ -112,7 +112,7 @@ Use the Triton latest release image version [24-03](https://docs.nvidia.com/deep
     export SINGULARITY_BINDPATH=/home,/scratch,/share/apps
 
     singularity exec ${nv} \
-    /scratch/hl5262/tritonserver_24.03-trtllm-python-py3.sif \
+    /scratch/{NetID}/tritonserver_24.03-trtllm-python-py3.sif \
     /bin/bash -c "
     unset -f which
     ${args}
